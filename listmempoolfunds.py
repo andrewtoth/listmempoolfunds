@@ -42,8 +42,8 @@ def init(options: dict, configuration: dict, plugin: Plugin, **kwargs):
         plugin.log(e.args[0]['message'], 'error')
         return { 'disable': e.args[0]['message'] }
     except Exception as e:
-        plugin.log(f'Could not connect to {service_url}\nPlease check all listmempoolfunds options.', 'error')
-        return { 'disable': f'Could not connect to {service_url}\nPlease check all listmempoolfunds options.' }
+        plugin.log(f'Could not connect to {plugin.service_url}\nPlease check all listmempoolfunds options.', 'error')
+        return { 'disable': f'Could not connect to {plugin.service_url}\nPlease check all listmempoolfunds options.' }
 
     if wallet_name in wallets:
         plugin.log(f'Wallet {wallet_name} already loaded.')
