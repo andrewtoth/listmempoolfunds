@@ -16,9 +16,10 @@ tracking unconfirmed deposits!
 
 ## Dependencies
 
-This plugin depends on having RPC access to a running Bitcoin Core. It also
-needs the wallet compiled in and not disabled (`disablewallet=0`), and it needs
-to not be running in blocks-only mode (`blocksonly=0`).
+This plugin depends on having RPC access to a running Bitcoin Core v0.21.0 or
+higher. It also needs the descriptor wallet compiled in and not disabled
+(`disablewallet=0`), and it needs to not be running in blocks-only mode
+(`blocksonly=0`).
 It *can* be running in pruned mode (`prune=<n>`), but you will need to have
 blocks back to at least where the first deposit to the node was made. After it
 has imported the descriptors and rescanned, older blocks can be pruned.
@@ -39,4 +40,4 @@ $ ./tools/hsmtool dumponchaindescriptors ~/.lightning/bitcoin/hsm_secret | xargs
 
 On startup, the plugin will check if the wallet exists and if it is loaded. If
 not, it will create the wallet, import the descriptors, and perform a rescan.
-On mainnet the rescan can take several hours, but it only has to happen once.
+On mainnet the rescan can take several hours, but will only happen the first time.
