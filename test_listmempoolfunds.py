@@ -10,8 +10,8 @@ bip32_seed = '8940A3407DCA074B19C1CA2F784C95776198D3353D6EE00CCA9741E606313087'
 
 def check_output(txid, addr, amount, output):
     assert output['txid'] == txid, 'Output is different than txid'
-    assert output['value'] == 5 * 10**7, 'Value is different'
-    assert output['amount_msat'] == 5 * 10**10, 'Msat is different'
+    assert output['value'] == amount, 'Value is different'
+    assert output['amount_msat'] == amount * 10**3, 'Msat is different'
     assert output['address'] == addr, 'Address is different'
 
 @unittest.skipIf(not DEVELOPER, "Need dev-force-bip32-seed")
