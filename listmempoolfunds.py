@@ -18,8 +18,8 @@ def init(options: dict, configuration: dict, plugin: Plugin, **kwargs):
     user = options['listmempoolfunds-rpcuser']
     password = options['listmempoolfunds-rpcpassword']
     port = options.get('listmempoolfunds-rpcport')
+    network = configuration['network']
     if port == 'null':
-        network = configuration['network']
         if network == 'testnet':
             port = '18332'
         elif network == 'regtest':
@@ -88,7 +88,7 @@ def init(options: dict, configuration: dict, plugin: Plugin, **kwargs):
                 plugin.log(f'Failed to import descriptor {raw_descs[i]}: {resps[i]["error"]["message"]}')
         
         plugin.log('Rescanning blockchain. Check bitcoind logs for progress.')
-        proxy.call('rescanblockchain', 481824) # Rescan at segwit block height
+        proxy.call('rescanblockchain', 481824 if network == 'mainnet' else 0) # Rescan at segwit block height
     except JSONRPCError as e:
         plugin.log(e.args[0]['message'], 'error')
     except timeout:
